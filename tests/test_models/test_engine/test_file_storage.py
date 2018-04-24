@@ -152,3 +152,38 @@ class testFileStorage(unittest.TestCase):
             json_dict = json.load(fd)
         for key, value in json_dict.items():
             self.assertTrue(value['id'] != my_id)
+
+    def test_get_file_storage_return(self):
+        """
+        Tests that the .get() method for file storage returns an object
+        """
+        object = State(name="California")
+        object.save()
+        self.assertEqual(models.storage.get("State", str(state.id)), object)
+
+    def test_get_file_storage_None_return(self):
+        """
+        Tests to make sure the .get() method for file storage returns None
+        if no object was found.
+        """
+        object = State(name="Minnesota")
+        object.save()
+        self.assertEqual(models.storage.get("State", "123456"), None)
+    
+    def test_count_file_storage_return(self):
+        """
+        Checks the return value of .count() method of file storage is a number
+        """
+        comp_length = len(models.storage.all("State"))
+        object = State(name="Texas")
+        object.save()
+        count_value = models.storage.count()
+        self.assertEqual(comp_length, count_value - 1)
+
+    def test_count_file_storage_None(self):
+        """
+        Checks that .count() returns the count of all objects in file storage
+        if cls is None
+        """
+        comp_length = len(models.storage.all("State"))
+        self.assertEqual(comp_length, models.storage.count("State"))
