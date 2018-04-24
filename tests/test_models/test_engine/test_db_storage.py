@@ -73,3 +73,29 @@ class testDBStorage(unittest.TestCase):
         state = State(name="Arizona")
         state.save()
         self.assertEqual(models.storage.get("State", str(state.id)), state)
+
+    def test_get_method_returns_None_if_no_object(self):
+        '''
+        Tests the get() method returns None if no object was found
+        '''
+        state = State(name="Arizona")
+        state.save()
+        self.assertEqual(models.storage.get("State", "123456"), None)
+
+    def test_count_method_returns_number_of_objects(self):
+        '''
+        Tests that the count() method returns the correct number of objects
+        '''
+        length1 = len(models.storage.all())
+        state = State(name="Washington")
+        state.save()
+        length2 = models.storage.count()
+        self.assertEqual(length1, length2 - 1)
+
+    def test_count_method_returns_number_of_objects_of_class(self):
+        '''
+        Tests that the count() method returns the number of objects with a given
+        class
+        '''
+        length1 = len(models.storage.all("State"))
+        self.assertEqual(length1, models.storage.count("State"))

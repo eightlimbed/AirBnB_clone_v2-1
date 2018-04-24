@@ -41,7 +41,6 @@ class DBStorage():
         '''
         Queries current database session based on class.
         Returns a dictionary representation of the query.
-        If cls is None, it will return a dictionary of all classes.
         '''
         result = []
         new_dict = {}
@@ -113,4 +112,6 @@ class DBStorage():
         Returns the number of objects in storage that match a class name. If no
         name is passed, all classes will be counted.
         '''
-        return len(self.all())
+        if cls is None:
+            return len(self.all())
+        return len(self.all(cls))
