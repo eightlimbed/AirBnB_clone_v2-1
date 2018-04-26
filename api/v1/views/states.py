@@ -73,7 +73,7 @@ def show_states():
     '''
     Retrieves the list of all State objects
     '''
-    states = {}
+    states = []
     for key, obj in storage.all('State').items():
-        states[key] = obj.to_dict()
+        states.append(obj.to_dict())
     return jsonify(states)
