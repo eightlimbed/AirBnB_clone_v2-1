@@ -56,7 +56,7 @@ def create_place(city_id):
     if name is None:
         abort(400, "Missing name")
     new_place = Place()
-    new_place.city_id = city_to_check.id
+    new_place.city_id = city_id
     for key, value in post_place.items():
         setattr(new_place, key, value)
     new_place.save()
