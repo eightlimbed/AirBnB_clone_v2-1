@@ -38,14 +38,15 @@ def create_city(state_id):
     post_city = request.get_json()
     if not post_city:
         abort(400, "Not a JSON")
-    if 'name' not in post_city:
+    name = post_city.get("name")
+    if name is None:
         abort(400, "Missing name")
     state_to_check = storage.get('State', state_id)
     if state_to_check is None:
         abort(404)
     new_city = City()
-    new_city.state_id = id
-    new_city.name = post_city.get('name')
+    new_city.state_id = state_id
+    new_city.name = name
     new_city.save()
     return jsonify(new_city.to_dict()), 201
 
@@ -75,7 +76,7 @@ def get_city_by_state(state_id):
     if state is None:
         abort(404)
     city = state.cities
-    city_list = [city.to_dict() for cities in city]
+    city_list = [cities.to_dict() for cities in city]
     return jsonify(city_list)
 
 
