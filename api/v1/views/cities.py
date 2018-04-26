@@ -51,7 +51,8 @@ def create_city(state_id):
 def delete_city(city_id):
     '''
     Deletes a city if city_id matches a city in storage
-        city_id: 
+        city_id: city ID of city to be deleted
+    Returns an empty JSON
     '''
     city_delete = storage.get('City', city_id)
     if city_delete is None:
@@ -75,6 +76,7 @@ def get_city_by_state(state_id):
         for cities in city_dict:
             city_list.append(cities)
         return jsonify(city_list)
+
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
 def get_cities_by_city_id(city_id):
