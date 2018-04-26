@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+'''
+Views for the /states and /states/<state_id> routes with CRUD methods
+'''
 from api.v1.views import app_views
 from models import storage
 from models.state import State
