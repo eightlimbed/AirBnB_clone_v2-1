@@ -41,25 +41,25 @@ def create_place(city_id):
     Returns a JSON of the newly created place otherwise raises 404
     '''
     post_place = request.get_json()
-    if not post_place:
+    if post_place is None:
         abort(400, "Not a JSON")
     city_to_check = storage.get('City', city_id)
     if city_to_check is None:
         abort(404)
-    name = post_place.get("name")
-    if name is None:
-        abort(400, "Missing name")
     user_id = post_place.get("user_id")
     if user_id is None:
         abort(400, "Missing user_id")
     user_to_check = storage.get('User', user_id)
     if user_to_check is None:
         abort(404)
+    name = post_place.get("name")
+    if name is None:
+        abort(400, "Missing name")
     new_place = Place()
-    new_place.city_id = city_to_check.city_id
+    new_place.city_id = city_to_check.id
     for key, value in post_place.items():
         setattr(new_place, key, value)
-    new_city.save()
+    new_place.save()
     return jsonify(new_place.to_dict()), 201
 
 
