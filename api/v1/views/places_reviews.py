@@ -27,7 +27,8 @@ def update_review(review_id):
     if put_review is None:
         abort(404)
     for key, val in request_json.items():
-        if key not in ['id', 'created_at', 'updated_at', 'user_id', 'place_id']:
+        if key not in ['id', 'created_at', 'updated_at', 'user_id',
+                       'place_id']:
             setattr(put_review, key, val)
     put_review.save()
     return jsonify(put_review.to_dict()), 200
@@ -53,7 +54,7 @@ def create_review(place_id):
     user_to_check = storage.get('User', user_id)
     if user_to_check is None:
         abort(404)
-    text = post_place.get("text")
+    text = post_review.get("text")
     if text is None:
         abort(400, "Missing text")
     new_review = Review()
