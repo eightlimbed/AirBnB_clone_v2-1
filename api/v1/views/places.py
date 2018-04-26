@@ -80,7 +80,7 @@ def delete_place(place_id):
 
 @app_views.route('/cites/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
-def get_place_by_city(state_id):
+def get_place_by_city(city_id):
     '''
     Retrieves json representation of all Place objects by City
     Returns JSON of all Place objects in the City or 404 error if None
@@ -102,4 +102,4 @@ def get_places_by_place_id(place_id):
     place_dict = storage.get('Place', place_id)
     if place_dict is None:
         abort(404)
-    return jsonify(place_dict.to_dict())
+    return jsonify(place_dict.to_dict()), 200
