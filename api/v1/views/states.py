@@ -13,7 +13,7 @@ def update_state(state_id):
     '''
     Updates a state if it exists
     '''
-    if not request.json:
+    if not request.is_json:
         abort(400, "Not a JSON")
     state = storage.get('State', state_id)
     if state is None:
@@ -31,7 +31,7 @@ def create_state():
     '''
     Creates a state if state_id matches a state in storage
     '''
-    if not request.json:
+    if not request.is_json:
         abort(400, "Not a JSON")
     state_json = request.get_json()
     if 'name' not in state_json.keys():
