@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+'''
+Views for /status and /stats routes
+'''
 from api.v1.views import app_views
 from models import storage
 from flask import jsonify
