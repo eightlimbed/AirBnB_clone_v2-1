@@ -60,7 +60,7 @@ def delete_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_city_by_state(state_id):
     '''
     Retrieves json representation of all City objects by State
