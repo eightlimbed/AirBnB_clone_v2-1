@@ -26,7 +26,7 @@ def update_place(place_id):
     if put_place is None:
         abort(404)
     for key, val in request_json.items():
-        if key not in ['id', 'created_at', 'updated_at']:
+        if key not in ['id', 'created_at', 'updated_at', 'user_id', 'city_id']:
             setattr(put_city, key, val)
     put_place.save()
     return jsonify(put_place.to_dict()), 200
