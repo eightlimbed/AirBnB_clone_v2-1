@@ -9,6 +9,7 @@ import json
 import sys
 import io
 import unittest
+import models
 from models.base_model import BaseModel
 from models.state import State
 from models.engine.file_storage import FileStorage
@@ -159,7 +160,7 @@ class testFileStorage(unittest.TestCase):
         """
         object = State(name="California")
         object.save()
-        self.assertEqual(models.storage.get("State", str(state.id)), object)
+        self.assertEqual(models.storage.get("State", str(object.id)), object)
 
     def test_get_file_storage_None_return(self):
         """
@@ -177,7 +178,7 @@ class testFileStorage(unittest.TestCase):
         comp_length = len(models.storage.all("State"))
         object = State(name="Texas")
         object.save()
-        count_value = models.storage.count()
+        count_value = models.storage.count('State')
         self.assertEqual(comp_length, count_value - 1)
 
     def test_count_file_storage_None(self):
