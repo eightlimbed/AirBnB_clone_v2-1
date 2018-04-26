@@ -78,7 +78,7 @@ def delete_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/cites/<city_id>/places', methods=['GET'],
+@app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_place_by_city(city_id):
     '''
@@ -88,8 +88,8 @@ def get_place_by_city(city_id):
     city = storage.get('City', city_id)
     if city is None:
         abort(404)
-    place = city.places
-    place_list = [places.to_dict() for places in place]
+    place_list = city.places
+    place_list = [places.to_dict() for places in place_list]
     return jsonify(place_list)
 
 
