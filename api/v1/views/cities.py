@@ -67,7 +67,7 @@ def get_city_by_state(state_id):
     Retrieves json representation of all City objects by State
     Returns JSON of all City objects in the state or 404 error if None
     '''
-    city_dict = storage.get('State', state_id)
+    city = storage.get('State', state_id)
     if city is None:
         abort(404)
     else:
