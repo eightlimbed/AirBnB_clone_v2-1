@@ -94,8 +94,8 @@ class testDBStorage(unittest.TestCase):
 
     def test_count_method_returns_number_of_objects_of_class(self):
         '''
-        Tests that the count() method returns the number of objects with a given
-        class
+        Tests that the count() method returns the number of objects with a
+        given class
         '''
         length1 = len(models.storage.all("State"))
         self.assertEqual(length1, models.storage.count("State"))

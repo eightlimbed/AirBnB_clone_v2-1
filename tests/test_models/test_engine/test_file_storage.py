@@ -105,7 +105,7 @@ class testFileStorage(unittest.TestCase):
         try:
             self.storage.reload()
             self.assertTrue(True)
-        except:
+        except Exception:
             self.assertTrue(False)
 
     def test_parameter_validity(self):
@@ -169,7 +169,7 @@ class testFileStorage(unittest.TestCase):
         object = State(name="Minnesota")
         object.save()
         self.assertEqual(models.storage.get("State", "123456"), None)
-    
+
     def test_count_file_storage_return(self):
         """
         Checks the return value of .count() method of file storage is a number
